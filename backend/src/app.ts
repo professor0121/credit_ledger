@@ -17,11 +17,13 @@ import { TransactionService } from "./services/TransactionService";
 import { AuthController } from "./controllers/AuthController";
 import { CustomerController } from "./controllers/CustomerController";
 import { TransactionController } from "./controllers/TransactionController";
+import { WebhookController } from "./controllers/WebhookController";
 
 // Import Routes
 import { createAuthRouter } from "./routes/auth.routes";
 import { createCustomerRouter } from "./routes/customer.routes";
 import { createTransactionRouter, createDashboardRouter } from "./routes/transaction.routes";
+import { createWebhookRouter } from "./routes/webhook.routes";
 
 // Import Jobs
 import { registerReminderJob } from "./jobs/reminder.cron";
@@ -48,12 +50,14 @@ const transactionService = new TransactionService(customerRepository, whatsAppSe
 const authController = new AuthController(authService);
 const customerController = new CustomerController(customerService, transactionService);
 const transactionController = new TransactionController(transactionService);
+const webhookController = new WebhookController();
 
 // Routes
 app.use("/api/auth", createAuthRouter(authController));
 app.use("/api/customers", createCustomerRouter(customerController));
 app.use("/api/transactions", createTransactionRouter(transactionController));
 app.use("/api/dashboard", createDashboardRouter(transactionController));
+app.use("/api/webhook", createWebhookRouter(webhookController));
 
 // Global Error Handler
 app.use(errorHandler);

@@ -10,6 +10,7 @@ export const config = {
   whatsApp: {
     phoneNumberId: process.env.WA_PHONE_NUMBER_ID || "",
     accessToken: process.env.WA_ACCESS_TOKEN || "",
+    verifyToken: process.env.WA_VERIFY_TOKEN || "dev_verify_token",
     isMock: !process.env.WA_PHONE_NUMBER_ID || process.env.WA_PHONE_NUMBER_ID.includes("mock"),
   },
   cloudinary: {

@@ -7,7 +7,7 @@ import { CustomerModel } from "./models/Customer.model";
 import { TransactionModel } from "./models/Transaction.model";
 
 const BASE_URL = `http://localhost:${config.port}`;
-const TEST_PHONE = "9999999999";
+const TEST_PHONE = "916269880874";
 
 async function runSmokeTest() {
   console.log("=== STARTING BACKEND SMOKE TEST ===");
@@ -65,7 +65,7 @@ async function runSmokeTest() {
     `${BASE_URL}/api/customers`,
     {
       name: "John Doe",
-      phone: "8888888888",
+      phone: "916269880874",
     },
     authHeaders
   );

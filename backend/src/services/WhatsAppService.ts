@@ -43,7 +43,7 @@ export class WhatsAppService {
       to: phone,
       type: "template",
       template: {
-        name: "otp_login",
+        name: "templage_na",
         language: { code: "en" },
         components: [{ type: "body", parameters: [{ type: "text", text: params.otp }] }],
       },

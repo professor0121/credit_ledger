@@ -29,7 +29,7 @@ export class AuthService {
 
     let shop = await ShopModel.findOne({ whatsappNumber: phone });
     if (!shop) {
-      shop = await ShopModel.create({ whatsappNumber: phone, ownerName: "", shopName: "" });
+      shop = await ShopModel.create({ whatsappNumber: phone, ownerName: "New Owner", shopName: "New Shop" });
     }
 
     const token = jwt.sign({ shopId: shop._id }, config.jwtSecret, {
