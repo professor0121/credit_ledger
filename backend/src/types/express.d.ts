@@ -1,9 +1,5 @@
-import * as express from "express";
-
-declare global {
-  namespace Express {
-    interface Request {
-      shopId?: string;
-    }
+declare namespace Express {
+  export interface Request {
+    shopId?: string;
   }
 }
