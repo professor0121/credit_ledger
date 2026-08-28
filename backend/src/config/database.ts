@@ -7,6 +7,6 @@ export async function connectDatabase(): Promise<void> {
     console.log("Connected to MongoDB successfully");
   } catch (error) {
     console.error("MongoDB connection failed:", error);
-    process.exit(1);
+    throw error;
   }
 }
