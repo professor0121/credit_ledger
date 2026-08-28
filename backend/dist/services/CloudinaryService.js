@@ -24,17 +24,16 @@ class CloudinaryService {
      * Structure: udhaar-app/{shopId}/customers/{filename}
      *            udhaar-app/{shopId}/shop-logo/{filename}
      */
-    async uploadImage(filePath, shopId, subfolder) {
+    async uploadImage(filePath) {
         if (this.isMock) {
-            console.log(`[MOCK CLOUDINARY] Uploading file from path "${filePath}" to folder "udhaar-app/${shopId}/${subfolder}"`);
+            console.log(`[MOCK CLOUDINARY] Uploading file from path "${filePath}"`);
             if (fs_1.default.existsSync(filePath)) {
                 fs_1.default.unlinkSync(filePath);
             }
-            return `https://res.cloudinary.com/mock-cloud/image/upload/v12345/udhaar-app/${shopId}/${subfolder}/mock-image.jpg`;
+            return `https://res.cloudinary.com/mock-cloud/image/upload/v12345/mock-image.jpg`;
         }
         try {
             const result = await cloudinary_1.v2.uploader.upload(filePath, {
-                folder: `udhaar-app/${shopId}/${subfolder}`,
                 resource_type: "image",
             });
             if (fs_1.default.existsSync(filePath)) {

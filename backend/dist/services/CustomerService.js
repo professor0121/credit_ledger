@@ -16,7 +16,7 @@ class CustomerService {
             currentBalance: 0,
         };
         if (data.photoPath) {
-            const url = await this.cloudinaryService.uploadImage(data.photoPath, shopId, "customers");
+            const url = await this.cloudinaryService.uploadImage(data.photoPath);
             customerData.photoUrl = url;
         }
         return this.customerRepository.create(customerData);

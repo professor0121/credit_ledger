@@ -20,7 +20,7 @@ export class CustomerService {
     };
 
     if (data.photoPath) {
-      const url = await this.cloudinaryService.uploadImage(data.photoPath, shopId, "customers");
+      const url = await this.cloudinaryService.uploadImage(data.photoPath);
       customerData.photoUrl = url;
     }
 
