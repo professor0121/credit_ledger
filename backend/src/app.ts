@@ -66,18 +66,21 @@ app.use("/", createWebhookRouter(webhookController));
 // Global Error Handler
 app.use(errorHandler);
 
-// Connect to Database and start server
-async function bootstrap() {
-  await connectDatabase();
+// Connect to Database
+connectDatabase().then(() => {
+  if (!process.env.VERCEL) {
+    // Register Scheduled Jobs (only when running as a persistent server)
+    registerReminderJob(whatsAppService);
+  }
+}).catch((err) => {
+  console.error("Failed to connect to database:", err);
+});
 
-  // Register Scheduled Jobs
-  registerReminderJob(whatsAppService);
-
+// Start listening only if not running on Vercel
+if (!process.env.VERCEL) {
   app.listen(config.port, () => {
     console.log(`Server is running on port ${config.port}`);
   });
 }
 
-bootstrap().catch((err) => {
-  console.error("Failed to bootstrap application:", err);
-});
+export default app;
