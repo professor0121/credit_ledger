@@ -1,20 +1,10 @@
 import { Router } from "express";
 import multer from "multer";
-import path from "path";
-import fs from "fs";
+import os from "os";
 import { CustomerController } from "../controllers/CustomerController";
 import { authMiddleware } from "../middleware/authMiddleware";
 
-// Ensure uploads directory exists
-const uploadDir = process.env.VERCEL 
-  ? "/tmp" 
-  : path.join(__dirname, "../../uploads");
-
-if (!process.env.VERCEL && !fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-const upload = multer({ dest: uploadDir });
+const upload = multer({ dest: os.tmpdir() });
 
 export function createCustomerRouter(customerController: CustomerController): Router {
   const router = Router();

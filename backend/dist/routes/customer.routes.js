@@ -6,17 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createCustomerRouter = createCustomerRouter;
 const express_1 = require("express");
 const multer_1 = __importDefault(require("multer"));
-const path_1 = __importDefault(require("path"));
-const fs_1 = __importDefault(require("fs"));
+const os_1 = __importDefault(require("os"));
 const authMiddleware_1 = require("../middleware/authMiddleware");
-// Ensure uploads directory exists
-const uploadDir = process.env.VERCEL
-    ? "/tmp"
-    : path_1.default.join(__dirname, "../../uploads");
-if (!process.env.VERCEL && !fs_1.default.existsSync(uploadDir)) {
-    fs_1.default.mkdirSync(uploadDir, { recursive: true });
-}
-const upload = (0, multer_1.default)({ dest: uploadDir });
+const upload = (0, multer_1.default)({ dest: os_1.default.tmpdir() });
 function createCustomerRouter(customerController) {
     const router = (0, express_1.Router)();
     router.use(authMiddleware_1.authMiddleware);
