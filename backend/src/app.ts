@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import path from "path";
 import { config } from "./config/env";
 import { connectDatabase } from "./config/database";
 
@@ -31,6 +30,7 @@ import { registerReminderJob } from "./jobs/reminder.cron";
 
 // Import Middleware
 import { errorHandler } from "./middleware/errorHandler";
+import { testerHtml } from "./utils/testerHtml";
 
 const app = express();
 
@@ -59,7 +59,7 @@ app.use("/api/customers", createCustomerRouter(customerController));
 app.use("/api/transactions", createTransactionRouter(transactionController));
 app.use("/api/dashboard", createDashboardRouter(transactionController));
 app.get("/", (_req, res) => {
-  res.sendFile(path.join(__dirname, "../webhook-tester.html"));
+  res.send(testerHtml);
 });
 app.use("/api/webhook", createWebhookRouter(webhookController));
 

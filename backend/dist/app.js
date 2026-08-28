@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const path_1 = __importDefault(require("path"));
 const env_1 = require("./config/env");
 const database_1 = require("./config/database");
 // Import Repositories
@@ -30,6 +29,7 @@ const webhook_routes_1 = require("./routes/webhook.routes");
 const reminder_cron_1 = require("./jobs/reminder.cron");
 // Import Middleware
 const errorHandler_1 = require("./middleware/errorHandler");
+const testerHtml_1 = require("./utils/testerHtml");
 const app = (0, express_1.default)();
 // Middleware
 app.use((0, cors_1.default)());
@@ -52,7 +52,7 @@ app.use("/api/customers", (0, customer_routes_1.createCustomerRouter)(customerCo
 app.use("/api/transactions", (0, transaction_routes_1.createTransactionRouter)(transactionController));
 app.use("/api/dashboard", (0, transaction_routes_1.createDashboardRouter)(transactionController));
 app.get("/", (_req, res) => {
-    res.sendFile(path_1.default.join(__dirname, "../webhook-tester.html"));
+    res.send(testerHtml_1.testerHtml);
 });
 app.use("/api/webhook", (0, webhook_routes_1.createWebhookRouter)(webhookController));
 // Global Error Handler
