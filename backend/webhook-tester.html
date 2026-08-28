@@ -463,8 +463,8 @@
     // Load initial text preset
     document.getElementById('postPayload').value = JSON.stringify(PRESETS.text, null, 2);
 
-    // Set default target URL to the current page's origin + '/'
-    const defaultUrl = window.location.origin + '/';
+    // Set default target URL to the current page's origin + '/api/webhook'
+    const defaultUrl = window.location.origin + '/api/webhook';
     document.getElementById('webhookUrl').value = defaultUrl;
 
     function switchTab(tabId) {

@@ -58,10 +58,10 @@ app.use("/api/auth", createAuthRouter(authController));
 app.use("/api/customers", createCustomerRouter(customerController));
 app.use("/api/transactions", createTransactionRouter(transactionController));
 app.use("/api/dashboard", createDashboardRouter(transactionController));
-app.get("/tester", (_req, res) => {
+app.get("/", (_req, res) => {
   res.sendFile(path.join(__dirname, "../webhook-tester.html"));
 });
-app.use("/", createWebhookRouter(webhookController));
+app.use("/api/webhook", createWebhookRouter(webhookController));
 
 // Global Error Handler
 app.use(errorHandler);
