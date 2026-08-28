@@ -61,7 +61,6 @@ app.use("/api/dashboard", createDashboardRouter(transactionController));
 app.get("/", (_req, res) => {
   res.sendFile(path.join(__dirname, "../webhook-tester.html"));
 });
-app.use("/api/webhook", createWebhookRouter(webhookController));
 
 // Global Error Handler
 app.use(errorHandler);
