@@ -5,7 +5,7 @@ dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 export const config = {
   port: parseInt(process.env.PORT || "5000", 10),
-  mongoUri: process.env.MONGO_URI || "mongodb://localhost:27017/credit_ledger",
+  mongoUri: process.env.MONGODB_URI || "mongodb://localhost:27017/credit_ledger",
   jwtSecret: process.env.JWT_SECRET || "dev_jwt_secret_key_change_me_in_production",
   whatsApp: {
     phoneNumberId: process.env.WA_PHONE_NUMBER_ID || "",
