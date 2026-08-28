@@ -1,5 +1,6 @@
 import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
 import { config } from "../config/env";
+import fs from "fs";
 
 export class CloudinaryService {
   private readonly isMock: boolean;
@@ -27,14 +28,27 @@ export class CloudinaryService {
   ): Promise<string> {
     if (this.isMock) {
       console.log(`[MOCK CLOUDINARY] Uploading file from path "${filePath}" to folder "udhaar-app/${shopId}/${subfolder}"`);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
       return `https://res.cloudinary.com/mock-cloud/image/upload/v12345/udhaar-app/${shopId}/${subfolder}/mock-image.jpg`;
     }
 
-    const result: UploadApiResponse = await cloudinary.uploader.upload(filePath, {
-      folder: `udhaar-app/${shopId}/${subfolder}`,
-      resource_type: "image",
-    });
-    return result.secure_url;
+    try {
+      const result: UploadApiResponse = await cloudinary.uploader.upload(filePath, {
+        folder: `udhaar-app/${shopId}/${subfolder}`,
+        resource_type: "image",
+      });
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+      return result.secure_url;
+    } catch (error) {
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+      throw error;
+    }
   }
 
   async deleteImage(publicId: string): Promise<void> {

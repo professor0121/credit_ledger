@@ -10,8 +10,10 @@ const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 const authMiddleware_1 = require("../middleware/authMiddleware");
 // Ensure uploads directory exists
-const uploadDir = path_1.default.join(__dirname, "../../uploads");
-if (!fs_1.default.existsSync(uploadDir)) {
+const uploadDir = process.env.VERCEL
+    ? "/tmp"
+    : path_1.default.join(__dirname, "../../uploads");
+if (!process.env.VERCEL && !fs_1.default.existsSync(uploadDir)) {
     fs_1.default.mkdirSync(uploadDir, { recursive: true });
 }
 const upload = (0, multer_1.default)({ dest: uploadDir });

@@ -6,8 +6,11 @@ import { CustomerController } from "../controllers/CustomerController";
 import { authMiddleware } from "../middleware/authMiddleware";
 
 // Ensure uploads directory exists
-const uploadDir = path.join(__dirname, "../../uploads");
-if (!fs.existsSync(uploadDir)) {
+const uploadDir = process.env.VERCEL 
+  ? "/tmp" 
+  : path.join(__dirname, "../../uploads");
+
+if (!process.env.VERCEL && !fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 

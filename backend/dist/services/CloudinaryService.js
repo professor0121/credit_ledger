@@ -1,8 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CloudinaryService = void 0;
 const cloudinary_1 = require("cloudinary");
 const env_1 = require("../config/env");
+const fs_1 = __importDefault(require("fs"));
 class CloudinaryService {
     isMock;
     constructor() {
@@ -23,13 +27,27 @@ class CloudinaryService {
     async uploadImage(filePath, shopId, subfolder) {
         if (this.isMock) {
             console.log(`[MOCK CLOUDINARY] Uploading file from path "${filePath}" to folder "udhaar-app/${shopId}/${subfolder}"`);
+            if (fs_1.default.existsSync(filePath)) {
+                fs_1.default.unlinkSync(filePath);
+            }
             return `https://res.cloudinary.com/mock-cloud/image/upload/v12345/udhaar-app/${shopId}/${subfolder}/mock-image.jpg`;
         }
-        const result = await cloudinary_1.v2.uploader.upload(filePath, {
-            folder: `udhaar-app/${shopId}/${subfolder}`,
-            resource_type: "image",
-        });
-        return result.secure_url;
+        try {
+            const result = await cloudinary_1.v2.uploader.upload(filePath, {
+                folder: `udhaar-app/${shopId}/${subfolder}`,
+                resource_type: "image",
+            });
+            if (fs_1.default.existsSync(filePath)) {
+                fs_1.default.unlinkSync(filePath);
+            }
+            return result.secure_url;
+        }
+        catch (error) {
+            if (fs_1.default.existsSync(filePath)) {
+                fs_1.default.unlinkSync(filePath);
+            }
+            throw error;
+        }
     }
     async deleteImage(publicId) {
         if (this.isMock) {
