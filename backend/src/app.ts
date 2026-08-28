@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
 import { config } from "./config/env";
 import { connectDatabase } from "./config/database";
 
@@ -57,7 +58,10 @@ app.use("/api/auth", createAuthRouter(authController));
 app.use("/api/customers", createCustomerRouter(customerController));
 app.use("/api/transactions", createTransactionRouter(transactionController));
 app.use("/api/dashboard", createDashboardRouter(transactionController));
-app.use("/api/webhook", createWebhookRouter(webhookController));
+app.get("/tester", (_req, res) => {
+  res.sendFile(path.join(__dirname, "../webhook-tester.html"));
+});
+app.use("/", createWebhookRouter(webhookController));
 
 // Global Error Handler
 app.use(errorHandler);
