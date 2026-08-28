@@ -9,7 +9,7 @@ export class CustomerController {
     private readonly transactionService: TransactionService
   ) {}
 
-  createCustomer = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  createCustomer = async (req: Request & { shopId?: string }, res: Response, next: NextFunction): Promise<void> => {
     try {
       const shopId = req.shopId;
       if (!shopId) throw new ApiError(401, "Unauthorized");
@@ -33,7 +33,7 @@ export class CustomerController {
     }
   };
 
-  listCustomers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  listCustomers = async (req: Request & { shopId?: string }, res: Response, next: NextFunction): Promise<void> => {
     try {
       const shopId = req.shopId;
       if (!shopId) throw new ApiError(401, "Unauthorized");
@@ -45,7 +45,7 @@ export class CustomerController {
     }
   };
 
-  getCustomerDetails = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  getCustomerDetails = async (req: Request & { shopId?: string }, res: Response, next: NextFunction): Promise<void> => {
     try {
       const shopId = req.shopId;
       if (!shopId) throw new ApiError(401, "Unauthorized");

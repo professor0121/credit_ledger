@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { config } from "../config/env";
 
-export function authMiddleware(req: Request, res: Response, next: NextFunction): void {
+export function authMiddleware(req: Request & { shopId?: string }, res: Response, next: NextFunction): void {
   const header = req.headers.authorization;
   const token = header?.split(" ")[1];
   if (!token) {

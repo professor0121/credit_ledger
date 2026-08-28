@@ -5,7 +5,7 @@ import { ApiError } from "../utils/ApiError";
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
 
-  addTransaction = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  addTransaction = async (req: Request & { shopId?: string }, res: Response, next: NextFunction): Promise<void> => {
     try {
       const shopId = req.shopId;
       if (!shopId) throw new ApiError(401, "Unauthorized");
@@ -38,7 +38,7 @@ export class TransactionController {
     }
   };
 
-  getDashboard = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  getDashboard = async (req: Request & { shopId?: string }, res: Response, next: NextFunction): Promise<void> => {
     try {
       const shopId = req.shopId;
       if (!shopId) throw new ApiError(401, "Unauthorized");
