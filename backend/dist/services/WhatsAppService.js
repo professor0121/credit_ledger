@@ -62,5 +62,14 @@ class WhatsAppService {
             },
         });
     }
+    async sendTextMessage(phone, text) {
+        await this.send({
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            to: phone,
+            type: "text",
+            text: { body: text },
+        });
+    }
 }
 exports.WhatsAppService = WhatsAppService;

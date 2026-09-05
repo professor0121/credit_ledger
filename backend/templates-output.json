@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "name": "hello_world",
+      "parameter_format": "POSITIONAL",
+      "components": [
+        {
+          "type": "HEADER",
+          "format": "TEXT",
+          "text": "Hello World"
+        },
+        {
+          "type": "BODY",
+          "text": "Welcome and congratulations!! This message demonstrates your ability to send a WhatsApp message notification from the Cloud API, hosted by Meta. Thank you for taking the time to test with us."
+        },
+        {
+          "type": "FOOTER",
+          "text": "WhatsApp Business Platform sample message"
+        }
+      ],
+      "language": "en_US",
+      "status": "APPROVED",
+      "category": "UTILITY",
+      "disable_ios_autofill": false,
+      "is_primary_device_delivery_only": false,
+      "id": "1103270609036800"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "QVFIVG9sRzhoRzI3em0xUkpUUjRHUEYza29NQzNEdXpOYUw5OTRVM0hTTnY3RXJrTDBGckRaZAlVLV01XTzROR05GOF9UQjFaRnZA2STU3RmFKRkl2RGhmbFlR",
+      "after": "QVFIVG9sRzhoRzI3em0xUkpUUjRHUEYza29NQzNEdXpOYUw5OTRVM0hTTnY3RXJrTDBGckRaZAlVLV01XTzROR05GOF9UQjFaRnZA2STU3RmFKRkl2RGhmbFlR"
+    }
+  }
+}

@@ -51,7 +51,7 @@ const transactionService = new TransactionService(customerRepository, whatsAppSe
 const authController = new AuthController(authService);
 const customerController = new CustomerController(customerService, transactionService);
 const transactionController = new TransactionController(transactionService);
-const webhookController = new WebhookController();
+const webhookController = new WebhookController(whatsAppService);
 
 // Routes
 app.use("/api/auth", createAuthRouter(authController));

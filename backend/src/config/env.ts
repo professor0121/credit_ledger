@@ -9,6 +9,7 @@ export const config = {
   jwtSecret: process.env.JWT_SECRET || "dev_jwt_secret_key_change_me_in_production",
   whatsApp: {
     phoneNumberId: process.env.WA_PHONE_NUMBER_ID || "",
+    businessAccountId: process.env.WA_BUSINESS_ACCOUNT_ID || "",
     accessToken: process.env.WA_ACCESS_TOKEN || "",
     verifyToken: process.env.WA_VERIFY_TOKEN || "dev_verify_token",
     isMock: !process.env.WA_PHONE_NUMBER_ID || process.env.WA_PHONE_NUMBER_ID.includes("mock"),
